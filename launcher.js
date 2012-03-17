@@ -1,5 +1,6 @@
 var usb_binding = require('node-usb'),
-    _  = require('underscore');
+    _           = require('underscore'),
+    async       = require('async');
 
 
 function RocketLauncher()
@@ -48,6 +49,10 @@ function RocketLauncher()
     {
       signal = this.commands[command];
     }
+    else if(command == 'test')
+    {
+      return this.testFunctions();
+    }
     else
     {
       signal = eval(command);
@@ -63,6 +68,39 @@ function RocketLauncher()
       }
     );
   };
+
+  this.testFunctions = function()
+  {
+    var tests = [];
+    var i = 0;
+    while(i < 100)
+    {
+      var launcher = this;
+
+      var func = function(callback)
+      {
+        console.log('i is ' + i);
+        launcher.runCommand(i);
+        setTimeout(
+          function()
+          {
+            callback(null, i);
+          },
+          1000
+        );
+      };
+
+      tests.push(func);
+      i++;
+    }
+    async.series(
+      tests,
+      function(err, results)
+      {
+      }
+    );
+    return;
+  }
 
   this.quit = function()
   {
