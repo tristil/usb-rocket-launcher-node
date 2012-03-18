@@ -6,3 +6,61 @@ body {
 a {
   color: #00B7FF;
 }
+
+#controls
+{
+  position: relative;
+  background-color: #eeeeee;
+  width: 80%;
+  height: 80%;
+}
+
+.button
+{
+  text-align: center;
+  height: 150px;
+  width: 150px;
+  background-color: #049cdb;
+  margin: 10px;
+  font-size: 20px;
+}
+
+#up
+{
+  position: absolute;
+  top:  0px;
+  left: 50%;
+  right: 50%;
+}
+
+#left 
+{
+  position: absolute;
+  top:  200px;
+  left: 25%;
+  right: 75%;
+}
+
+#right
+{
+  position: absolute;
+  top:  200px;
+  right: 25%;
+  left: 75%;
+}
+
+#down
+{
+  position: absolute;
+  top:  400px;
+  left: 50%;
+  right: 50%;
+}
+
+#shoot
+{
+  position: absolute;
+  top:  200px;
+  left: 50%;
+  right: 50%;
+}
