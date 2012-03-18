@@ -71,34 +71,37 @@ function RocketLauncher()
 
   this.testFunctions = function()
   {
+    var launcher = this;
     var tests = [];
     var i = 0;
     while(i < 100)
     {
-      var launcher = this;
+      (function (i)
+       {
+         var func = function(callback)
+         {
+           console.log('i is ' + i);
+           launcher.runCommand(i);
+           setTimeout(
+             function()
+             {
+               callback(null, i);
+             },
+             1000
+             );
+         };
+         tests.push(func);
+       })(i);
 
-      var func = function(callback)
-      {
-        console.log('i is ' + i);
-        launcher.runCommand(i);
-        setTimeout(
-          function()
-          {
-            callback(null, i);
-          },
-          1000
-        );
-      };
-
-      tests.push(func);
-      i++;
+       i++;
     }
+
     async.series(
-      tests,
-      function(err, results)
-      {
-      }
-    );
+        tests,
+        function(err, results)
+        {
+        }
+        );
     return;
   }
 

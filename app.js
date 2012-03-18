@@ -19,12 +19,16 @@ app.configure(function(){
   app.use(express.static(__dirname + '/public'));
 });
 
+var listen_port = 80;
+
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  listen_port = 3033;
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler());
+  listen_port = 80;
 });
 
 // Routes
@@ -32,5 +36,5 @@ app.configure('production', function(){
 app.get('/', routes.index);
 app.get('/perform_command/:command', routes.perform_command);
 
-app.listen(80);
+app.listen(listen_port);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

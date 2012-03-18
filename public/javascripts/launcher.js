@@ -25,12 +25,15 @@ $(document).ready(
             }
           );
 
-          $('#' + item).mouseup(
-            function(event)
-            {
-              submitCommand('stop');
-            }
-          );
+          if(item != 'shoot')
+          {
+            $('#' + item).mouseup(
+              function(event)
+              {
+                submitCommand('stop');
+              }
+            );
+          }
         }
       );
     }
