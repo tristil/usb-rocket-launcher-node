@@ -18,7 +18,7 @@ $(document).ready(
       $(['up', 'down', 'left', 'right', 'shoot']).each(
         function(index, item)
         {
-          $('#' + item).mousedown(
+          $('#' + item).on('vmousedown',
             function(event)
             {
               submitCommand(item);
@@ -27,7 +27,7 @@ $(document).ready(
 
           if(item != 'shoot')
           {
-            $('#' + item).mouseup(
+            $('#' + item).on('vmouseup',
               function(event)
               {
                 submitCommand('stop');
