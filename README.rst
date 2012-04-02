@@ -5,7 +5,7 @@ This code contains two things:
 
 * A driver for the Dream Cheeky Thunder Missile Launcher
   (http://www.dreamcheeky.com/thunder-missile-launcher), written in Nodejs
-  using the node-usb library.
+  using the node-usb library (https://github.com/schakko/node-usb).
 * A Nodejs/Express web interface for controlling the launcher. The frontend
   interface is implemented with jQuery Mobile (http://jquerymobile.com)
   allowing the rocket launcher to be controlled with a touch screen on a smart
@@ -22,7 +22,7 @@ Requirements
 Notes
 -----
 
-* Heavily indebted to the pyrocket code. The only reason that I developed the
+* Heavily indebted to the pyrocket code (http://code.google.com/p/pyrocket/) . The only reason that I developed the
   driver using Node and node-usb was that it didn't cause a segfault when
   trying to grab the device. 
 * The pyrocket source code lists device ids and command addresses for a variety
