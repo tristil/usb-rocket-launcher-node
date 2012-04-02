@@ -24,7 +24,7 @@ Notes
 
 * Heavily indebted to the pyrocket code (http://code.google.com/p/pyrocket/) . The only reason that I developed the
   driver using Node and node-usb was that it didn't cause a segfault when
-  trying to grab the device. 
+  trying to grab the device on the hardware I was using (a Beaglebone running Angstrom). 
 * The pyrocket source code lists device ids and command addresses for a variety
   of other rocket launchers. It would be easy to modify this code to run with
   them. I just don't have other rocket launcher models to play with.
