@@ -37,3 +37,13 @@ echo "Installing udev rule..."
 echo ""
 
 sudo cp 70-usb-rocket-launcher.rules /etc/udev/rules.d/
+
+echo ""
+echo "Create 'rocket' group..."
+echo ""
+sudo addgroup rocket
+
+echo ""
+echo "Adding current user to 'rocket' group..."
+echo ""
+sudo addgroup `whoami` rocket

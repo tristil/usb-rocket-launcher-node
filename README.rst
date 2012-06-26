@@ -23,9 +23,7 @@ Setup
 -----
 * Run ./install.sh to download and compile a copy of node-usb library and
   install a udev rule that will grant access to the usb device for members of
-  group 'rocket'. This will require sudo.
-* After this you will have to add your current user to group 'rocket'. You may
-  have to unplug and replug the device to get the correct permissions.
+  group 'rocket', which will be created. This will require sudo.
 * ./cli will give direct access to the rocket launcher, using f(stop),
   g(shoot), h(left), j(up), k(down), l(right) keys.
 * ./run_dev_server.sh will launch the web interface at port 3033 and
