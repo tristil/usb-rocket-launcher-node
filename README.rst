@@ -19,6 +19,20 @@ Requirements
 * express and dependencies
 * run_server.sh uses supervisor package
 
+Setup
+-----
+* Run ./install.sh to download and compile a copy of node-usb library and
+  install a udev rule that will grant access to the usb device for members of
+  group 'rocket'. This will require sudo.
+* After this you will have to add your current user to group 'rocket'. You may
+  have to unplug and replug the device to get the correct permissions.
+* ./cli will give direct access to the rocket launcher, using f(stop),
+  g(shoot), h(left), j(up), k(down), l(right) keys.
+* ./run_dev_server.sh will launch the web interface at port 3033 and
+  automatically restart the server when code is changed.
+* Use NODE_ENV=production node app.js to run in production. If you already have
+  Apache running on port 80 you'll have to change the port in app.js.
+
 Notes
 -----
 
