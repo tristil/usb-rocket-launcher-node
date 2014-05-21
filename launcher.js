@@ -1,7 +1,8 @@
-var usb_binding = require('node-usb'),
+var usb         = require('usb'),
     _           = require('underscore'),
     async       = require('async');
 
+usb.setDebugLevel(3);
 
 function RocketLauncher()
 {
@@ -19,25 +20,7 @@ function RocketLauncher()
 
   this.acquireDevice = function()
   {
-    var usb = new usb_binding.Usb();
-    usb.refresh();
-    usb.setDebugLevel(3);
-    var devices = usb.getDevices();
-
-    launcher_device = null;
-
-    _.each(devices, function(device)
-    {
-      var descriptor = device.getDeviceDescriptor();
-      if(descriptor.idVendor == 8483 && descriptor.idProduct == 4112)
-      {
-        console.log('Found device ' + descriptor.idProduct);
-        launcher_device = device;
-        return false;
-      }
-    }
-    );
-
+    var launcher_device = usb.findByIds(8483, 4112);
     this.launcher_device = launcher_device;
   }
 
@@ -59,8 +42,11 @@ function RocketLauncher()
     }
 
     this.launcher_device.controlTransfer(
+      0x21,
+      0x09,
+      0x0,
+      0x0,
       new Buffer([0x02, signal, 0x00,0x00,0x00,0x00,0x00,0x00]),
-      0x21,0x09, 0x0, 0x0,
       function(data)
       {
         console.log(command)
@@ -105,8 +91,7 @@ function RocketLauncher()
     return;
   }
 
-  this.quit = function()
-  {
+  this.quit = function() {
     this.launcher_interface.release(
     function(data) {
       console.log('released')
@@ -126,9 +111,12 @@ function RocketLauncher()
   {
     this.acquireDevice();
 
-    this.launcher_interface = this.launcher_device.getInterfaces()[0];
-    this.launcher_interface.detachKernelDriver();
-    this.launcher_interface.claim();
+    this.launcher_device.open();
+    this.launcher_interface = this.launcher_device.interfaces[0];
+    if (this.launcher_interface.isKernelDriverActive()) {
+      this.launcher_interface.detachKernelDriver();
+    }
+    // this.launcher_interface.claim();
   };
 
   this.init();

@@ -3,7 +3,7 @@ var rocketlauncher = require('./launcher');
 launcher = new rocketlauncher.RocketLauncher();
 
 var stdin = process.openStdin();
-require('tty').setRawMode(true);
+require('process').stdin.setRawMode(true);
 
 var queued_command = '';
 
